@@ -1,0 +1,27 @@
+import qrcode
+
+# Get user input for the data to be encoded
+data = input("Enter the data to be encoded in the QR code: ")
+
+# Creating an instance of QRCode
+qr = qrcode.QRCode(
+    version=1,  # controls the size of the QR Code
+    error_correction=qrcode.constants.ERROR_CORRECT_L,  # controls the error correction used for the QR Code
+    box_size=10,  # controls how many pixels each “box” of the QR code is
+    border=4,  # controls how many boxes thick the border should be
+)
+
+# Adding data to the instance
+qr.add_data(data)
+qr.make(fit=True)
+
+# Creating an image from the QR Code instance
+img = qr.make_image(fill_color="black", back_color="white")
+
+# Get user input for the file name
+file_name = input("Enter the file name to save the QR code (without extension): ")
+
+# Saving the image
+img.save(f"{file_name}.png")
+
+print(f"QR code saved as {file_name}.png")
